@@ -1,0 +1,112 @@
+<!-- 6th June  -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Development</title>
+    <style>
+        .container {
+            width: 1200px;
+            margin: auto;
+            text-align: center;
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        .first {
+            width: 500px;
+        }
+
+        .output {
+            width: 100px;
+            height: 10px;
+        }
+
+        .result
+        {
+            width: 172px;
+            height: 19px;
+            border: 1px solid rgb(118, 118, 118);
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="first">
+            <h1>Reverse a number</h1>
+            <div style="margin: 15px;">
+                <label for="num">Input : </label>
+                <input type="number" id="num" placeholder="Enter a number...">
+            </div>
+            <div style="margin: 15px; display: flex; padding: 10px; gap: 5px; justify-content: center;">
+                <div class="out">Output : </div>
+                <div class="result" id="res1"></div>
+            </div>
+            <button type="submit" onclick="calculatenum()">Convert</button>
+        </div>
+        <div class="first">
+            <h1>Arrange in order</h1>
+            <div style="margin: 15px;">
+                <label for="name">Input : </label>
+                <input type="text" id="name" placeholder="Enter a string...">
+            </div>
+            <div style="margin: 15px; display: flex; padding: 10px; gap: 5px; justify-content: center;">
+                <div class="out">Output : </div>
+                <div class="result" id="res2"></div>
+            </div>
+            <button type="submit" onclick="calculatestr()">Convert</button>
+        </div>
+    </div>
+
+    <script>
+        function calculatenum()
+        {
+            let rem=0;
+            let rev=0;
+            let num=document.getElementById("num").value;
+            while(num!==0)
+            {
+                rem=num%10;
+                rev=rem+rev*10;
+                num=Math.floor(num/10);
+            }
+            document.getElementById("res1").textContent=rev;
+        }
+
+        function calculatestr()
+        {
+            let chars=document.getElementById("name").value;
+            let str=[];
+            for(let i=0;i<chars.length;i++)
+            {
+                str[i]=chars[i];
+            }
+            let temp;
+            for(let i=0;i<str.length;i++)
+            {
+                for(let j=i+1;j<str.length;j++)
+                {   
+                    if(str[i]>str[j])
+                    {
+                        temp=str[i];
+                        str[i]=str[j];
+                        str[j]=temp;
+                    }
+                }
+            }
+            let ans="";
+            for(let i=0;i<chars.length;i++)
+            {
+                ans+=str[i];
+            }
+            document.getElementById("res2").textContent=ans;
+        }
+    </script>
+</body>
+
+</html>
