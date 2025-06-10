@@ -1,0 +1,159 @@
+<!-- 6th June  -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Password Generator</title>
+  <style>
+    * {
+      background-color: rgb(51, 37, 37);
+    }
+
+    .container {
+      max-width: 600px;
+      padding: 30px;
+      margin: 30px auto;
+      box-shadow: 1px 1px 1px white;
+      background-color: black;
+      border-radius: 15px;
+      text-align: center;
+    }
+
+    .heading {
+      background-color: white;
+      border-radius: 20px;
+      padding: 10px;
+      width: 480px;
+      text-align: center;
+      font-size: x-large;
+      font-weight: bolder;
+      margin: auto;
+    }
+
+    .output {
+      display: flex;
+      width: 450px;
+      margin: 32px auto;
+      background-color: black;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .answer {
+      width: 250px;
+      border-radius: 20px;
+      background-color: white;
+      padding: 10px;
+      color: black;
+      overflow-x: auto;
+    }
+
+    .text {
+      background-color: black;
+      color: white;
+      padding: 8px;
+      font-size: large;
+      border-radius: 15px;
+      border: 2px solid white;
+    }
+
+    .text:hover {
+      background-color: rgb(57, 52, 52);
+    }
+
+    .button {
+      background-color: white;
+      width: 50px;
+      padding: 5px;
+      border-radius: 15px;
+      border: none;
+    }
+
+    .specifications {
+      background-color: black;
+      display: flex;
+      justify-content: space-evenly;
+      width: 418px;
+      margin: auto;
+    }
+
+    label {
+      background-color: black;
+      color: white;
+    }
+
+    #value {
+      background-color: black;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="heading">Password - Generator</div>
+    <div class="output">
+      <div class="answer" id="answerBox"></div>
+      <button class="text" onclick="generatePassword()">Generate</button>
+      <button class="button" onclick="copyPassword()">Copy</button>
+    </div>
+    <div class="specifications">
+      <input type="range" id="length" min="10" max="100" value="50" oninput="updateLengthDisplay()">
+      <span id="value">Length 5</span>
+      <input type="checkbox" id="characters">
+      <label for="characters">Characters</label>
+      <input type="checkbox" id="numbers">
+      <label for="numbers">Numbers</label>
+    </div>
+  </div>
+
+  <script>
+    function updateLengthDisplay() {
+      document.getElementById("value").textContent =
+        "Length " + Math.floor(document.getElementById("length").value / 10);
+    }
+
+    function generatePassword() {
+      let length = Math.floor(document.getElementById("length").value / 10);
+      let includeChars = document.getElementById("characters").checked;
+      let includeNums = document.getElementById("numbers").checked;
+
+      if (!includeChars && !includeNums) {
+        document.getElementById("answerBox").textContent = "Select at least one option!";
+        return;
+      }
+
+      let charCount = includeChars ? Math.floor(Math.random() * (length + 1)) : 0;
+      let numCount = includeNums ? length - charCount : 0;
+      if (!includeNums) charCount = length; 
+      let result = "";
+      for (let i = 0; i < charCount; i++) {
+        let code = Math.floor(Math.random() * (126 - 33 + 1)) + 33;
+        if (code >= 48 && code <= 57) {
+          i--;
+          continue;
+        }
+        result += String.fromCharCode(code);
+      }
+
+      for (let j = 0; j < numCount; j++) {
+        let code = Math.floor(Math.random() * (57 - 48 + 1)) + 48;
+        result += String.fromCharCode(code);
+      }
+
+      document.getElementById("answerBox").textContent = result;
+    }
+
+    function copyPassword() {
+      const password = document.getElementById("answerBox").textContent;
+      if (!password) return;
+      navigator.clipboard.writeText(password).then(() => {
+        alert("Password copied to clipboard!");
+      });
+    }
+
+    updateLengthDisplay();
+  </script>
+</body>
+</html>

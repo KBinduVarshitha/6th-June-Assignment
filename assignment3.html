@@ -1,0 +1,248 @@
+<!-- 6th June -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Form</title>
+    <style>
+        .container {
+            max-width: 660px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        label {
+            display: inline-block;
+            width: 180px;
+        }
+
+        .complete {
+            display: inline;
+            gap: 0px;
+
+        }
+
+        input,
+        textarea {
+            width: 250px;
+            padding: 5px;
+            border: 2px solid #ccc;
+            margin-bottom: 10px;
+        }
+
+        
+        input[type="radio"] {
+            width: 12px;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-left: 10px;
+            width: 100px;
+        }
+        
+        input.error-border,
+        textarea.error-border,
+        select.error-border {
+            border-color: red;
+        }
+        
+        button {
+            margin-top: 10px;
+            padding: 8px 16px;
+        }
+        
+        .round {
+            width: auto;
+        }
+        img {
+            width: 28px;
+            height: 30px;
+            position: relative;
+            top: 7px;
+            margin: -4px;
+            left: 1px;
+            background-color: #dcd7d7;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Registration Form</h2>
+        <form id="regForm" onsubmit="return validateForm()">
+            <div>
+                <label>First Name</label>
+                <div class="complete">
+                    <img src="contact.png" alt="" >
+                    <input type="text" id="fname" placeholder="First Name">
+                </div>
+                <span class="error" id="fnameError"></span>
+            </div>
+            <div>
+                <label>Last Name</label>
+                <div class="complete">
+                    <img src="contact.png" alt=""  >
+                    <input type="text" id="lname" placeholder="Last Name">
+                </div>
+                <span class="error" id="lnameError"></span>
+            </div>
+            <div>
+                <label>Email</label>
+                <div class="complete">
+                    <img src="email.png" alt=""  >
+                    <input type="email" id="email" placeholder="E-Mail Address">
+                </div>
+                <span class="error" id="emailError"></span>
+            </div>
+            <div>
+                <label>Phone</label>
+                <div class="complete">
+                    <img src="https://cdn-icons-png.freepik.com/256/159/159684.png?uid=R175320053&ga=GA1.1.2005274387.1732197697&semt=ais_incoming" alt="">
+                    <input type="tel" id="pno" placeholder="(645)555-1212">
+                </div>
+                <span class="error" id="phoneError"></span>
+            </div>
+            <div>
+                <label>Address</label>
+                <div class="complete">
+                    <img   src="https://cdn-icons-png.freepik.com/256/10079/10079230.png?uid=R175320053&ga=GA1.1.2005274387.1732197697&semt=ais_hybrid" alt="">
+                    <input type="text" id="address" placeholder="Address">
+                </div>
+                <span class="error" id="addressError"></span>
+            </div>
+            <div>
+                <label>City</label>
+                <div class="complete">
+                    <img   src="https://cdn-icons-png.freepik.com/256/10079/10079230.png?uid=R175320053&ga=GA1.1.2005274387.1732197697&semt=ais_hybrid" alt="">
+                    <input type="text" id="city" placeholder="city">
+                </div>
+                <span class="error" id="cityError"></span>
+            </div>
+            <div>
+                <label>State</label>
+                <div class="complete">
+                    <img src="https://cdn-icons-png.freepik.com/256/12534/12534320.png?uid=R175320053&ga=GA1.1.2005274387.1732197697&semt=ais_incoming" alt="">
+                    <select name="states" id="state" style="height: 31px;">
+                        <option value="selectstate">Select State</option>
+                        <option value="AP">AP</option>
+                        <option value="Telangana">Telangana</option>
+                        <option value="Tamil Nadu">Tamil Nadu</option>
+                        <option value="Kerala">Kerala</option>
+                        <option value="Karnataka">Karnataka</option>
+                    </select>
+                </div>
+                <span class="error" id="stateError"></span>
+            </div>
+            <div>
+                <label>Do you have hosting?</label>
+                <label for="yes" class="round">Yes</label>
+                <input type="radio" id="yes">
+                <label for="no" class="round">No</label>
+                <input type="radio" id="no">
+                <span class="error" id="hostError"></span>
+            </div>
+            <div style="display: flex;">
+                <label>Project Description</label>
+                <div class="complete">
+                    <img src="https://cdn-icons-png.freepik.com/256/17560/17560259.png?uid=R175320053&ga=GA1.1.2005274387.1732197697&semt=ais_incoming" alt="" style="top: -15px; height: 42px;">
+                    <textarea style="height: 30px;" id="project" id="project" placeholder="Project Description" rows="4"></textarea>
+                </div>
+                <span class="error" id="projectError"></span>
+            </div>
+            <button
+                style="position: relative; left: 181px; background-color: rgb(243, 162, 12); border: none; color: white;"
+                type="submit">Send</button>
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            let valid = true;
+            document.querySelectorAll('.error').forEach(el => el.textContent = '');
+            document.querySelectorAll('input, textarea').forEach(el => el.classList.remove('error-border'));
+
+            const fname = document.getElementById('fname').value.trim();
+            if (fname === '') {
+                document.getElementById('fnameError').textContent = "Please supply your First Name";
+                document.getElementById('fname').classList.add('error-border');
+                valid = false;
+            }
+
+            const lname = document.getElementById('lname').value.trim();
+            if (lname === '') {
+                document.getElementById('lnameError').textContent = "Please supply your Last Name";
+                document.getElementById('lname').classList.add('error-border');
+                valid = false;
+            }
+
+            const email = document.getElementById('email').value.trim();
+            const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+            if (email === '') {
+                document.getElementById('emailError').textContent = "Please supply your Email address";
+                document.getElementById('email').classList.add('error-border');
+                valid = false;
+            } else if (!emailPattern.test(email)) {
+                document.getElementById('emailError').textContent = "A valid email address is required";
+                document.getElementById('email').classList.add('error-border');
+                valid = false;
+            }
+
+            const pno = document.getElementById('pno').value.trim();
+            if (pno === '') {
+                document.getElementById('phoneError').textContent = "Please supply your Phone Number";
+                document.getElementById('pno').classList.add('error-border');
+                valid = false;
+            }
+
+            const add = document.getElementById('address').value.trim();
+            if (add === '') {
+                document.getElementById('addressError').textContent = "Please supply your Address";
+                document.getElementById('address').classList.add('error-border');
+                valid = false;
+            }
+
+            const city = document.getElementById('city').value.trim();
+            if (city === '') {
+                document.getElementById('cityError').textContent = "Please supply your City";
+                document.getElementById('city').classList.add('error-border');
+                valid = false;
+            }
+
+            const state = document.getElementById('state').value.trim();
+            if (state === 'selectstate') {
+                document.getElementById('stateError').textContent = "Please supply your State";
+                document.getElementById('state').classList.add('error-border');
+                valid = false;
+            }
+
+            const hostyes = document.getElementById('yes').checked;
+            const hostno = document.getElementById('no').checked;
+            if (!hostyes && !hostno) {
+                document.getElementById('hostError').textContent = "Please supply your option";
+                document.getElementById('yes').classList.add('error-border');
+                document.getElementById('no').classList.add('error-border');
+                valid = false;
+            }
+
+            const project = document.getElementById('project').value.trim();
+            if (project === '') {
+                document.getElementById('projectError').textContent = "Please enter your description";
+                document.getElementById('project').classList.add('error-border');
+                valid = false;
+            }
+            return valid;
+        }
+    </script>
+
+</body>
+
+</html>
